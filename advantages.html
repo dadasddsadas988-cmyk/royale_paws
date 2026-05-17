@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Преимущества — Royal Paws</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== PAGE HERO ===== */
+.page-hero {
+    min-height: 55vh;
+    padding: 160px 7% 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: rgba(255,255,255,.4);
+}
+.breadcrumb a { color: rgba(212,175,55,.7); text-decoration: none; transition: .2s; }
+.breadcrumb a:hover { color: #d4af37; }
+.breadcrumb span { color: rgba(255,255,255,.25); }
+
+.page-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 96px;
+    line-height: 1.1;
+    max-width: 780px;
+}
+
+.page-hero p {
+    font-size: 18px;
+    color: #d0cbc2;
+    line-height: 1.85;
+    max-width: 600px;
+    margin-top: 32px;
+}
+
+/* ===== BIG FEATURES ===== */
+.features-section {
+    padding: 60px 7% 80px;
+}
+
+.feature-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(212,175,55,.07);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: .7s ease;
+}
+
+.feature-block.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feature-block:last-child { border-bottom: none; }
+
+.feature-block.reverse { direction: rtl; }
+.feature-block.reverse > * { direction: ltr; }
+
+.feature-visual {
+    background: rgba(212,175,55,.05);
+    border: 1px solid rgba(212,175,55,.12);
+    border-radius: 44px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 110px;
+    position: relative;
+    overflow: hidden;
+    transition: .4s;
+}
+
+.feature-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,175,55,.08), transparent);
+    pointer-events: none;
+}
+
+.feature-block:hover .feature-visual {
+    border-color: rgba(212,175,55,.3);
+    transform: scale(1.015);
+}
+
+.feature-num {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    color: rgba(212,175,55,.12);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.feature-text { }
+
+.feature-text .premium-label { margin-bottom: 16px; display: block; }
+
+.feature-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 68px;
+    line-height: 1.1;
+    margin-bottom: 28px;
+}
+
+.feature-text p {
+    color: #d0cbc2;
+    line-height: 1.9;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.feature-tag {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(212,175,55,.1);
+    border: 1px solid rgba(212,175,55,.2);
+    color: #f5f1e8;
+    font-size: 13px;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.comparison-section {
+    padding: 60px 7% 120px;
+}
+
+.comparison-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: .7s;
+}
+
+.comparison-table.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 22px 28px;
+    border-bottom: 1px solid rgba(212,175,55,.07);
+    text-align: center;
+    font-size: 15px;
+}
+
+.comparison-table th {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #f5f1e8;
+    background: rgba(255,255,255,.03);
+}
+
+.comparison-table th:first-child { text-align: left; }
+.comparison-table td:first-child { text-align: left; color: #d0cbc2; }
+
+.comparison-table th.col-us {
+    background: rgba(212,175,55,.1);
+    color: #d4af37;
+    border-left: 1px solid rgba(212,175,55,.2);
+    border-right: 1px solid rgba(212,175,55,.2);
+}
+
+.comparison-table td.col-us {
+    background: rgba(212,175,55,.04);
+    border-left: 1px solid rgba(212,175,55,.1);
+    border-right: 1px solid rgba(212,175,55,.1);
+}
+
+.check { color: #d4af37; font-size: 20px; }
+.cross { color: rgba(255,255,255,.2); font-size: 20px; }
+
+.comparison-table tr:hover td { background: rgba(255,255,255,.02); }
+.comparison-table tr:hover td.col-us { background: rgba(212,175,55,.07); }
+
+/* ===== GUARANTEE SECTION ===== */
+.guarantee-section {
+    padding: 0 7% 120px;
+}
+
+.guarantee-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    margin-bottom: 50px;
+}
+
+.guarantee-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.guarantee-card {
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(212,175,55,.1);
+    border-radius: 28px;
+    padding: 38px 32px;
+    transition: .4s;
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.guarantee-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.guarantee-card:hover {
+    border-color: rgba(212,175,55,.35);
+    transform: translateY(-6px);
+}
+
+.guarantee-icon { font-size: 40px; margin-bottom: 18px; }
+.guarantee-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 34px; margin-bottom: 12px; }
+.guarantee-card p { color: #d0cbc2; line-height: 1.8; font-size: 14px; }
+
+/* ===== CTA ===== */
+.adv-cta {
+    padding: 0 7% 140px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+.adv-cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    max-width: 640px;
+    line-height: 1.1;
+}
+
+.adv-cta p { color: #d0cbc2; font-size: 17px; max-width: 480px; line-height: 1.8; }
+
+.cta-buttons {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 980px) {
+    .page-hero h1 { font-size: 58px; }
+    .feature-block, .feature-block.reverse { grid-template-columns: 1fr; direction: ltr; }
+    .feature-text h2 { font-size: 52px; }
+    .guarantee-grid { grid-template-columns: 1fr; }
+    .adv-cta h2 { font-size: 52px; }
+    .comparison-table { font-size: 13px; }
+    .comparison-table th, .comparison-table td { padding: 14px 12px; }
+}
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas class="particles-canvas" id="particlesCanvas"></canvas>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<header class="header">
+    <a href="index.html" class="logo" style="text-decoration:none;">Royal Paws</a>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="about.html">О питомнике</a>
+        <a href="advantages.html" style="color:#d4af37;">Преимущества</a>
+        <a href="puppies.html">Щенки</a>
+        <a href="index.html#contacts">Контакты</a>
+    </nav>
+    <button class="header-btn contact-trigger-btn" id="contactBtnHeader">Связаться</button>
+    <button class="hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+</header>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <div class="mobile-nav-drawer">
+        <div class="mobile-nav-header">
+            <div class="mobile-nav-logo">Royal Paws</div>
+            <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html">Главная</a>
+            <a href="about.html">О питомнике</a>
+            <a href="advantages.html">Преимущества</a>
+            <a href="puppies.html">Щенки</a>
+            <a href="index.html#contacts">Контакты</a>
+        </div>
+        <div class="mobile-nav-footer">
+            <button class="gold-btn ripple-btn contact-trigger-btn" style="width:100%;justify-content:center;">✦ Связаться</button>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="breadcrumb">
+        <a href="index.html">Главная</a>
+        <span>/</span>
+        <span>Преимущества</span>
+    </div>
+    <span class="premium-label">WHY ROYAL PAWS</span>
+    <h1>Почему выбирают<br><span style="color:#d4af37;">Royal Paws</span></h1>
+    <p>Мы не просто продаём щенков. Мы даём вам уверенность, поддержку и связь с питомником на протяжении всей жизни вашего питомца.</p>
+</section>
+
+<!-- FEATURE BLOCKS -->
+<section class="features-section">
+
+    <div class="feature-block">
+        <div class="feature-visual">
+            <div class="feature-num">01</div>
+            🏅
+        </div>
+        <div class="feature-text">
+            <span class="premium-label">РОДОСЛОВНАЯ</span>
+            <h2>Чистая<br>родословная</h2>
+            <p>Все наши щенки происходят от титулованных родителей с подтверждёнными документами РКФ и FCI. Мы тщательно ведём племенные книги и сохраняем чистоту линий породы.</p>
+            <p>Каждый покупатель получает полный пакет документов: свидетельство о происхождении, ветеринарный паспорт, справки о вакцинации и результаты генетических тестов.</p>
+            <div class="feature-tags">
+                <span class="feature-tag">РКФ</span>
+                <span class="feature-tag">FCI</span>
+                <span class="feature-tag">Генетические тесты</span>
+                <span class="feature-tag">Родословная 5 колен</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="feature-block reverse">
+        <div class="feature-visual">
+            <div class="feature-num">02</div>
+            🏡
+        </div>
+        <div class="feature-text">
+            <span class="premium-label">СОДЕРЖАНИЕ</span>
+            <h2>Премиальное<br>содержание</h2>
+            <p>Наши щенки растут не в клетках, а в домашней обстановке — с детьми, другими животными и постоянным человеческим контактом. Это формирует устойчивую психику и открытый характер.</p>
+            <p>Просторные вольеры с климат-контролем, премиальные корма, еженедельные ветеринарные осмотры — стандарт, от которого мы никогда не отступаем.</p>
+            <div class="feature-tags">
+                <span class="feature-tag">Домашнее воспитание</span>
+                <span class="feature-tag">Premium корм</span>
+                <span class="feature-tag">Ветосмотры</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="feature-block">
+        <div class="feature-visual">
+            <div class="feature-num">03</div>
+            🤝
+        </div>
+        <div class="feature-text">
+            <span class="premium-label">ПОДДЕРЖКА</span>
+            <h2>Поддержка<br>после продажи</h2>
+            <p>Мы не исчезаем после того, как щенок уходит в новый дом. Наши заводчики всегда на связи — консультируют по вопросам питания, здоровья, воспитания и ухода.</p>
+            <p>Каждый покупатель вступает в закрытое сообщество владельцев Royal Paws: обмен опытом, совместные прогулки и специальные предложения от партнёров.</p>
+            <div class="feature-tags">
+                <span class="feature-tag">24/7 консультации</span>
+                <span class="feature-tag">Клуб владельцев</span>
+                <span class="feature-tag">Гарантия здоровья</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="feature-block reverse">
+        <div class="feature-visual">
+            <div class="feature-num">04</div>
+            🩺
+        </div>
+        <div class="feature-text">
+            <span class="premium-label">ЗДОРОВЬЕ</span>
+            <h2>100% ветеринарный<br>контроль</h2>
+            <p>Каждый щенок проходит комплексное обследование до передачи новому владельцу: анализы крови, ультразвук, проверка сердца, офтальмологический осмотр.</p>
+            <p>Мы сотрудничаем с ведущими ветеринарными клиниками Москвы и проводим обязательное ДНК-тестирование на наследственные заболевания.</p>
+            <div class="feature-tags">
+                <span class="feature-tag">ДНК-тесты</span>
+                <span class="feature-tag">УЗИ и кардио</span>
+                <span class="feature-tag">Офтальмология</span>
+                <span class="feature-tag">Анализы крови</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison-section fade-up">
+    <span class="premium-label" style="display:block;text-align:center;margin-bottom:14px;">СРАВНЕНИЕ</span>
+    <h2>Royal Paws vs другие питомники</h2>
+    <table class="comparison-table" id="compTable">
+        <thead>
+            <tr>
+                <th style="text-align:left;">Критерий</th>
+                <th class="col-us">Royal Paws</th>
+                <th>Обычный питомник</th>
+                <th>Частный заводчик</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Документы РКФ / FCI</td>
+                <td class="col-us"><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td><span class="cross">—</span></td>
+            </tr>
+            <tr>
+                <td>ДНК-тесты на наследственные болезни</td>
+                <td class="col-us"><span class="check">✓</span></td>
+                <td><span class="cross">—</span></td>
+                <td><span class="cross">—</span></td>
+            </tr>
+            <tr>
+                <td>Домашнее воспитание щенков</td>
+                <td class="col-us"><span class="check">✓</span></td>
+                <td><span class="cross">—</span></td>
+                <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+                <td>Поддержка после продажи</td>
+                <td class="col-us"><span class="check">✓</span></td>
+                <td><span class="cross">—</span></td>
+                <td><span class="cross">—</span></td>
+            </tr>
+            <tr>
+                <td>Международные выставочные победы</td>
+                <td class="col-us"><span class="check">✓</span></td>
+                <td><span class="cross">—</span></td>
+                <td><span class="cross">—</span></td>
+            </tr>
+            <tr>
+                <td>Гарантия здоровья 2 года</td>
+                <td class="col-us"><span class="check">✓</span></td>
+                <td><span class="cross">—</span></td>
+                <td><span class="cross">—</span></td>
+            </tr>
+            <tr>
+                <td>Клуб владельцев</td>
+                <td class="col-us"><span class="check">✓</span></td>
+                <td><span class="cross">—</span></td>
+                <td><span class="cross">—</span></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- GUARANTEES -->
+<section class="guarantee-section">
+    <span class="premium-label">НАШИ ГАРАНТИИ</span>
+    <h2>Мы гарантируем</h2>
+    <div class="guarantee-grid">
+        <div class="guarantee-card">
+            <div class="guarantee-icon">🛡️</div>
+            <h3>Здоровье 2 года</h3>
+            <p>Гарантируем отсутствие наследственных заболеваний в течение двух лет с момента передачи щенка. При обнаружении — замена или возврат.</p>
+        </div>
+        <div class="guarantee-card">
+            <div class="guarantee-icon">📄</div>
+            <h3>Полный пакет документов</h3>
+            <p>Родословная РКФ/FCI, ветеринарный паспорт с отметками о прививках, договор купли-продажи с печатью питомника.</p>
+        </div>
+        <div class="guarantee-card">
+            <div class="guarantee-icon">💬</div>
+            <h3>Постоянная поддержка</h3>
+            <p>Наши специалисты отвечают на вопросы в любое время суток. Мы сопровождаем каждую собаку на протяжении всей её жизни.</p>
+        </div>
+        <div class="guarantee-card">
+            <div class="guarantee-icon">🔬</div>
+            <h3>Генетическая чистота</h3>
+            <p>Все производители проходят обязательное ДНК-тестирование. Мы работаем только со здоровыми особями без генетических отклонений.</p>
+        </div>
+        <div class="guarantee-card">
+            <div class="guarantee-icon">🏠</div>
+            <h3>Правильная социализация</h3>
+            <p>Щенки растут в домашних условиях, привыкают к людям, звукам и другим животным — это основа спокойного характера.</p>
+        </div>
+        <div class="guarantee-card">
+            <div class="guarantee-icon">🏆</div>
+            <h3>Выставочный потенциал</h3>
+            <p>Если вы хотите выставочного щенка — мы подберём кандидата с правильным экстерьером и родословной чемпионов.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="adv-cta fade-up">
+    <span class="premium-label">СЛЕДУЮЩИЙ ШАГ</span>
+    <h2>Убедились? Давайте познакомимся</h2>
+    <p>Посмотрите доступных щенков или свяжитесь с нами — мы поможем выбрать идеального питомца именно для вас.</p>
+    <div class="cta-buttons">
+        <a href="puppies.html" class="gold-btn">Выбрать щенка</a>
+        <button class="outline-btn contact-trigger-btn">Задать вопрос</button>
+    </div>
+</section>
+
+<!-- CONTACT POPUP -->
+<div class="contact-popup" id="contactPopup">
+    <div class="contact-popup-inner">
+        <button class="contact-popup-close" id="closePopup">✕</button>
+        <div class="contact-popup-logo">Royal Paws</div>
+        <p class="contact-popup-subtitle">Мы ответим в течение часа</p>
+        <div class="contact-popup-items">
+            <a href="tel:+79991234567" class="contact-popup-item">
+                <span class="cp-icon">📞</span>
+                <div>
+                    <div class="cp-label">Телефон</div>
+                    <div class="cp-value">+7 (999) 123-45-67</div>
+                </div>
+            </a>
+            <a href="mailto:royalpaws@mail.ru" class="contact-popup-item">
+                <span class="cp-icon">✉</span>
+                <div>
+                    <div class="cp-label">Email</div>
+                    <div class="cp-value">royalpaws@mail.ru</div>
+                </div>
+            </a>
+            <a href="https://t.me/royalpaws" class="contact-popup-item">
+                <span class="cp-icon">✈</span>
+                <div>
+                    <div class="cp-label">Telegram</div>
+                    <div class="cp-value">@royalpaws</div>
+                </div>
+            </a>
+            <div class="contact-popup-item" style="cursor:default;">
+                <span class="cp-icon">📍</span>
+                <div>
+                    <div class="cp-label">Адрес</div>
+                    <div class="cp-value">Москва, Россия</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contact-popup-overlay" id="popupOverlay"></div>
+
+<script src="script.js"></script>
+<script src="contact-popup.js"></script>
+<script src="mobile-nav.js"></script>
+<script>
+// Feature blocks
+const featureBlocks = document.querySelectorAll('.feature-block');
+const fbObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.15 });
+featureBlocks.forEach(el => fbObs.observe(el));
+
+// Comparison table
+const compTable = document.getElementById('compTable');
+const ctObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.2 });
+if (compTable) ctObs.observe(compTable);
+
+// Guarantee cards staggered
+const gcards = document.querySelectorAll('.guarantee-card');
+const gcObs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('show'), i * 100);
+    });
+}, { threshold: 0.1 });
+gcards.forEach(el => gcObs.observe(el));
+</script>
+</body>
+</html>
