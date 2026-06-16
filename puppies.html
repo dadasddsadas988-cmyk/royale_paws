@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Paws — Щенки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas class="particles-canvas" id="particlesCanvas"></canvas>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
+
+<header class="header" id="siteHeader">
+    <div class="logo">Royal Paws</div>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="about.html">О питомнике</a>
+        <a href="advantages.html">Преимущества</a>
+        <a href="puppies.html" style="color:#d4af37;">Щенки</a>
+        <a href="index.html#contacts">Контакты</a>
+    </nav>
+    <a href="index.html" class="header-btn">Назад</a>
+    <button class="hamburger" id="hamburger" aria-label="Меню">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <div class="mobile-nav-drawer">
+        <div class="mobile-nav-header">
+            <div class="mobile-nav-logo">Royal Paws</div>
+            <button class="mobile-nav-close" id="mobileNavClose">X</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html">Главная</a>
+            <a href="about.html">О питомнике</a>
+            <a href="advantages.html">Преимущества</a>
+            <a href="puppies.html">Щенки</a>
+            <a href="index.html#contacts">Контакты</a>
+        </div>
+        <div class="mobile-nav-footer">
+            <button class="gold-btn contact-trigger-btn" style="width:100%;justify-content:center;">Связаться</button>
+        </div>
+    </div>
+</div>
+
+<section class="puppies-page">
+    <div class="section-title">
+        <span class="premium-label">AVAILABLE PUPPIES</span>
+        <h2>Доступные щенки</h2>
+    </div>
+    <div class="dogs-grid" id="dogsGrid"></div>
+</section>
+
+<div class="puppy-modal" id="puppyModal">
+    <div class="puppy-modal-content">
+        <button class="puppy-close" onclick="closePuppyModal()">X</button>
+        <div class="puppy-modal-inner">
+            <div class="puppy-modal-gallery" id="modalGallery">
+                <button class="gallery-arrow gallery-prev" id="galleryPrev" onclick="galleryShift(-1)">&#8592;</button>
+                <div class="gallery-track-wrap">
+                    <div class="gallery-track" id="galleryTrack"></div>
+                </div>
+                <button class="gallery-arrow gallery-next" id="galleryNext" onclick="galleryShift(1)">&#8594;</button>
+                <div class="gallery-dots" id="galleryDots"></div>
+                <div class="puppy-badge" id="modalBadge"></div>
+            </div>
+            <div class="puppy-modal-info">
+                <div id="viewInfo">
+                    <h2 id="modalName"></h2>
+                    <p id="modalDesc" class="puppy-modal-desc"></p>
+                    <div class="puppy-specs">
+                        <div class="spec-item"><span class="spec-label">Порода</span><span class="spec-value" id="specBreed">—</span></div>
+                        <div class="spec-item"><span class="spec-label">Возраст</span><span class="spec-value" id="specAge">—</span></div>
+                        <div class="spec-item"><span class="spec-label">Пол</span><span class="spec-value" id="specGender">—</span></div>
+                        <div class="spec-item"><span class="spec-label">Окрас</span><span class="spec-value" id="specColor">—</span></div>
+                        <div class="spec-item"><span class="spec-label">Документы</span><span class="spec-value" id="specDocs">—</span></div>
+                        <div class="spec-item"><span class="spec-label">Прививки</span><span class="spec-value" id="specVax">—</span></div>
+                    </div>
+                    <div class="puppy-modal-footer">
+                        <div class="puppy-modal-price" id="modalPrice"></div>
+                        <div class="puppy-modal-actions">
+                            <a href="tel:+79991234567" class="gold-btn">Позвонить</a>
+                            <button class="pay-btn" onclick="showForm()">Оформить покупку</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="viewForm" style="display:none;">
+                    <button class="form-back" onclick="hideForm()">Назад</button>
+                    <h2 class="form-title">Заявка на щенка</h2>
+                    <p class="form-subtitle">Заполните форму — менеджер свяжется с вами в течение 15 минут</p>
+                    <div class="app-form">
+                        <div class="form-group">
+                            <label>Ваше имя</label>
+                            <input type="text" id="fName" placeholder="Иван Иванов">
+                        </div>
+                        <div class="form-group">
+                            <label>Телефон</label>
+                            <input type="tel" id="fPhone" placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div class="form-group">
+                            <label>Удобный способ связи</label>
+                            <div class="contact-pills">
+                                <button type="button" class="pill active" data-val="Телефон">Телефон</button>
+                                <button type="button" class="pill" data-val="WhatsApp">WhatsApp</button>
+                                <button type="button" class="pill" data-val="Telegram">Telegram</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Комментарий</label>
+                            <textarea id="fComment" placeholder="Ваши вопросы или пожелания..."></textarea>
+                        </div>
+                        <button class="submit-btn" onclick="submitForm()">Отправить заявку</button>
+                    </div>
+                </div>
+                <div id="viewSuccess" style="display:none;">
+                    <div class="success-wrap">
+                        <div class="success-icon">V</div>
+                        <h2 class="success-title">Заявка принята!</h2>
+                        <p class="success-text">Мы получили вашу заявку на щенка <strong id="successName"></strong>. Менеджер свяжется с вами в течение 15 минут.</p>
+                        <button class="gold-btn" onclick="closePuppyModal()">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact-popup" id="contactPopup">
+    <div class="contact-popup-inner">
+        <button class="contact-popup-close" id="closePopup">X</button>
+        <div class="contact-popup-logo">Royal Paws</div>
+        <p class="contact-popup-subtitle">Мы ответим в течение часа</p>
+        <div class="contact-popup-items">
+            <a href="tel:+79991234567" class="contact-popup-item">
+                <span class="cp-icon">📞</span>
+                <div><div class="cp-label">Телефон</div><div class="cp-value">+7 (999) 123-45-67</div></div>
+            </a>
+            <a href="mailto:royalpaws@mail.ru" class="contact-popup-item">
+                <span class="cp-icon">✉</span>
+                <div><div class="cp-label">Email</div><div class="cp-value">royalpaws@mail.ru</div></div>
+            </a>
+            <a href="https://t.me/royalpaws" class="contact-popup-item">
+                <span class="cp-icon">✈</span>
+                <div><div class="cp-label">Telegram</div><div class="cp-value">@royalpaws</div></div>
+            </a>
+            <div class="contact-popup-item" style="cursor:default;">
+                <span class="cp-icon">📍</span>
+                <div><div class="cp-label">Адрес</div><div class="cp-value">Москва, Россия</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contact-popup-overlay" id="popupOverlay"></div>
+<script src="js/main.js"></script>
+<script src="js/contact-popup.js"></script>
+<script src="js/mobile-nav.js"></script>
+<script src="js/puppies.js"></script>
+</body>
+</html>
